@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .margin {
+            padding: 25% 25% 25% 38%;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="float-right " style="margin-right:1%;"><a href="/travels">Home</a> | <a href="/logoff">Logoff</a>
+        </div>
+        <div class="jumbotron jumbotron-fluid text-center">
+            <div class="container">
+                <h1 class="display-4">The Trip!!</h1>
+                <h1>Planner: {{user.name}}</h1>
+            </div>
+        </div>
+        <div class="margin">
+            {% for trips in trip %}
+            <h1>{{trips.destination}}</h1>
+            <ul>
+                <li>Description: {{trips.desc}}</li>
+                <li>Travel Date From: {{trips.trip_start}}</li>
+                <li>Travel Date to: {{trips.trip_end}}</li>
+            </ul>
+            <h1>Other Users joining this trip:</h1>
+            {% for user in joinedusers %}
+
+            <ul>
+
+                <li>{{user.name}}</li>
+
+            </ul>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

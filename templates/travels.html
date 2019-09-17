@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <meta charset="UTF-8">
+
+    <title>Main</title>
+
+    <style>
+        .btn-link {
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            color: #0000EE;
+            padding: 0;
+            text-decoration: underline;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .background {
+            background-color: #a1bbd0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="float-right " style="margin-right:1%;"><a href="/logoff">Logoff </a> </div>
+        <div class="jumbotron jumbotron-fluid text-center">
+            <div class="container">
+                <h1 class="display-4">Hello, {{loggeduser.name}}</h1>
+            </div>
+        </div>
+        <h2>Your Trip Schedules</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Description</th>
+            </tr>
+
+            {% for trip in trips %}
+            <tr>
+                <td class="background"><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+                <td class="bg-success">{{trip.trip_start}}</td>
+                <td class="bg-warning">{{trip.trip_end}}</td>
+                <td class="bg-primary">{{trip.desc}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h2>Other Users' Travel Plans </h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Do you want to join?</th>
+            </tr>
+
+            {% for user in users %}
+            {% for trip in alltrips %}
+            {% if trip not in trips and trip.user_planned == user %}
+            <tr>
+                <td class="bg-primary">{{user.name}}</td>
+                <td class="bg-success">{{trip.destination}}</td>
+                <td class="bg-warning">{{trip.trip_start}}</td>
+                <td class="bg-primary">{{trip.trip_end}}</td>
+                <td class="background">
+                    <a href="join/{{trip.id}}">Join</a>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </table>
+
+
+        <form action="travels/add" method="post">
+            {% csrf_token %}
+            <input class="btn-link" type="submit" value="Add Travel Plans">
+        </form>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
